@@ -1,0 +1,17 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container-fluid
+    %a.navbar-brand{:href => "/"} Jake's Jobs Board™
+    %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarNav", "data-bs-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      %ul.navbar-nav.ml-auto
+        - if user_signed_in?
+          %li.nav-item
+            = link_to current_user.email, edit_user_registration_path, class: "nav-link"
+          %li.nav-item
+            = link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary"
+        - else
+          %li.nav-item
+            = link_to 'Register', new_user_registration_path, class: 'nav-link'
+          %li.nav-item
+            = link_to 'Sign in', new_user_session_path, class: 'nav-link'
