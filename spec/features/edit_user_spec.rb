@@ -3,15 +3,8 @@ require 'rails_helper'
 describe 'the edit user details process', type: :feature do
   before :each do
     Capybara.current_driver = :selenium
-    visit new_user_registration_path
-    fill_in 'Email', with: 'jake@gmail.com'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
-    fill_in 'First name', with: 'jake'
-    fill_in 'Last name', with: 'smith'
-    find('input[name="commit"]').click
-    token = User.last.confirmation_token
-    visit "users/confirmation?confirmation_token=#{token}"
+    user = build(:user)
+    user.save!
     visit new_user_session_path
     fill_in 'Email', with: 'jake@gmail.com'
     fill_in 'Password', with: 'password'
@@ -20,7 +13,6 @@ describe 'the edit user details process', type: :feature do
 
   it 'edits the password' do
     visit edit_user_registration_path
-    fill_in 'Email', with: 'jake@gmail.com'
     fill_in 'Password', with: 'password2'
     fill_in 'Password confirmation', with: 'password2'
     fill_in 'Current password', with: 'password'
@@ -69,10 +61,10 @@ describe 'the edit user details process', type: :feature do
     fill_in 'Last name', with: 'Smithsonian'
     find('input[name="commit"]').click
 
-    expect(current_path).to eq(user_registration_path)
     expect(page).to have_text("Current password can't be blank")
-    expect(User.last.last_name).to eq('smith')
-    expect(User.last.first_name).to eq('jake')
+    expect(current_path).to eq(user_registration_path)
+    expect(User.last.last_name).to eq('Doe')
+    expect(User.last.first_name).to eq('John')
   end
 
   it 'deletes account' do

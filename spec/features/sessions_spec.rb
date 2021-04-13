@@ -2,15 +2,8 @@ require 'rails_helper'
 
 describe 'the signin process', type: :feature do
   before :each do
-    visit new_user_registration_path
-    fill_in 'Email', with: 'jake@gmail.com'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
-    fill_in 'First name', with: 'jake'
-    fill_in 'Last name', with: 'smith'
-    find('input[name="commit"]').click
-    user = User.find_by_email 'jake@gmail.com'
-    visit "users/confirmation?confirmation_token=#{user.confirmation_token}"
+    user = build(:user)
+    user.save!
   end
 
   it 'signs @user in' do

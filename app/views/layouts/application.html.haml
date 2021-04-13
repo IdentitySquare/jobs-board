@@ -1,18 +1,17 @@
-!!!
 %html
   %head
+    = render 'shared/navbar'
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title JobsBoard
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     = csrf_meta_tags
     = csp_meta_tag
   %body
-    %p
-      \&lt;
-      = stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
-      = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-      = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-    = render 'shared/navbar'
-    %p.notice= notice
-    %p.alert= alert
-    = yield
+    .container
+      %p
+        = stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
+        = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+        = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+      %p.notice= notice
+      %p.alert= alert
+      = yield
