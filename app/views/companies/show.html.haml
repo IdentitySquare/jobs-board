@@ -1,0 +1,14 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @company.name
+%p
+  %b Description:
+  = @company.description
+-if policy(@company).update?
+  = link_to 'Edit', edit_company_path(@company)
+  \|
+  = link_to 'Delete Company', @company, method: :delete, data: { confirm: 'Are you sure?' }
+  \|
+= link_to 'Back', companies_path
