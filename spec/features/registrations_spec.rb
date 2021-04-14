@@ -40,6 +40,7 @@ describe 'the sign up process', type: :feature do
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
     find('input[name="commit"]').click
+
     expect(page).to have_text("Email can't be blank")
     expect(current_path).to eq(user_registration_path)
   end

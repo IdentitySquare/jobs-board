@@ -13,6 +13,10 @@ class CompanyPolicy < ApplicationPolicy
     user_is_owner?
   end
 
+  def edit?
+    user_is_owner?
+  end
+
   def show?
     true
   end

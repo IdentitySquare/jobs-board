@@ -12,7 +12,5 @@
   .field
     = f.label :description
     = f.text_area :description, class: "form-control"
-  .field
-    = f.number_field :user_id, id: :company_user_id, class: "form-control", value: current_user.id, type: :hidden
   .actions
     = f.submit 'Save'
