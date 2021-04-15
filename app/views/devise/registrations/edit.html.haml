@@ -39,5 +39,5 @@
 %br/
 %h3 Delete my account
 %p
-  This will also delete all job postings from the website! #{button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
+  This will also delete all job postings from the website! #{button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'}
 = link_to "Back", :back

@@ -1,9 +1,15 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   .container-fluid
     %a.navbar-brand{:href => "/"} Jake's Jobs Board™
     %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarNav", "data-bs-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     #navbarNav.collapse.navbar-collapse
+      %ul.navbar-nav
+        - if user_signed_in?
+          %li.nav-item
+            = link_to 'Add Company', new_company_path, class: 'nav-link'
+        %li.nav-item
+          = link_to 'View Companies', companies_path, class: 'nav-link'
       %ul.navbar-nav.ml-auto
         - if user_signed_in?
           %li.nav-item

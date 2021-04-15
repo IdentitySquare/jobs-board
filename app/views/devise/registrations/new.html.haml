@@ -23,8 +23,6 @@
   .field
     = f.label :password_confirmation
     %br/
-    %em (Must match password)
-    %br/
     = f.password_field :password_confirmation, autocomplete: "new-password"
   .actions
     = f.submit "Sign up"
