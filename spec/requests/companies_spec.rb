@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe '/companies', type: :request do
-  describe 'GET /index' do
+  describe 'company path' do
     it 'renders a successful response' do
       get companies_path
 

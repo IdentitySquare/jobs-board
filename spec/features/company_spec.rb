@@ -26,11 +26,11 @@ describe 'does not allow a different user', type: :feature do
     user.save!
     company = build(:company, user_id: user.id)
     company.save!
-    user2 = build(:user, email: 'jake2@gmail.com')
+    user2 = build(:user)
     user2.save!
     visit new_user_session_path
-    fill_in 'Email', with: 'jake2@gmail.com'
-    fill_in 'Password', with: 'password'
+    fill_in 'Email', with: user2.email
+    fill_in 'Password', with: user2.password
     find('input[name="commit"]').click
     visit "/companies/#{company.id}/edit"
 
@@ -45,8 +45,8 @@ describe 'allows users', type: :feature do
     user = build(:user)
     user.save!
     visit new_user_session_path
-    fill_in 'Email', with: 'jake@gmail.com'
-    fill_in 'Password', with: 'password'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
     find('input[name="commit"]').click
     visit new_company_path
   end

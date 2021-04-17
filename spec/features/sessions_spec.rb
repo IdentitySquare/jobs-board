@@ -2,24 +2,24 @@ require 'rails_helper'
 
 describe 'the signin process', type: :feature do
   before :each do
-    user = build(:user)
-    user.save!
+    @user = build(:user)
+    @user.save!
   end
 
   it 'signs @user in' do
     visit new_user_session_path
-    fill_in 'Email', with: 'jake@gmail.com'
-    fill_in 'Password', with: 'password'
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
     find('input[name="commit"]').click
 
     expect(current_path).to eq(root_path)
     expect(page).to have_text('Signed in successfully.')
-    expect(User.last.email).to eq('jake@gmail.com')
+    expect(User.last.email).to eq(@user.email)
   end
 
   it "throws error if password doesn't match with email in db" do
     visit new_user_session_path
-    fill_in 'Email', with: 'jake@gmail.com'
+    fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'password1'
     find('input[name="commit"]').click
 
@@ -30,8 +30,8 @@ describe 'the signin process', type: :feature do
   it "throws error if user doesn't exist" do
     User.last.destroy
     visit new_user_session_path
-    fill_in 'Email', with: 'jake1@gmail.com'
-    fill_in 'Password', with: 'password'
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
     find('input[name="commit"]').click
 
     expect(current_path).to eq(new_user_session_path)

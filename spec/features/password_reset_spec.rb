@@ -1,17 +1,13 @@
 require 'rails_helper'
 
 describe 'the token password reset process', type: :feature do
-  before :each do
+  it 'edits the password using reset token' do
     user = build(:user)
     user.save!
     visit new_user_session_path
-  end
-
-  it 'edits the password using reset token' do
-    visit new_user_session_path
     click_link 'Forgot your password'
     expect(current_path).to eq(new_user_password_path)
-    fill_in 'Email', with: 'jake@gmail.com'
+    fill_in 'Email', with: user.email
     find('input[name="commit"]').click
     token = User.last.send_reset_password_instructions
     visit "/users/password/edit?reset_password_token=#{token}"

@@ -1,6 +1,9 @@
 FactoryBot.define do
   factory :company do
-    name { 'Google' }
-    description { 'Is one of the leading companies.' }
+    name { Faker::Company.name }
+    description do
+      Faker::Company.industry + Faker::Company.catch_phrase +
+        Faker::Company.buzzword + Faker::Company.bs + Faker::Company.logo
+    end
   end
 end

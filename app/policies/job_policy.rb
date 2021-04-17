@@ -1,4 +1,11 @@
-class CompanyPolicy < ApplicationPolicy
+class JobPolicy
+  attr_reader :user, :job
+
+  def initialize(user, job)
+    @user = user
+    @job = job
+  end
+
   def show?
     true
   end
@@ -26,6 +33,6 @@ class CompanyPolicy < ApplicationPolicy
   private
 
   def user_is_owner?
-    @user == @record.user
+    @user == @job.company.user
   end
 end

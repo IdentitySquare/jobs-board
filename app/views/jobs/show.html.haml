@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%h2
+  = @company.description
+= link_to "View all jobs from #{@company.name}", company_path(@company)
+%br
+%br
+%br
+%h3
+  %b
+    = @job.title
+%br
+%p
+  %b Job Description:
+  = @job.description
+%p
+  %b Job Type:
+  = @job.job_type
+-if current_user == @company.user
+  = link_to 'Edit', edit_company_job_path(@company, @job)
+  \|
+  = link_to 'Delete', company_job_path(@company, @job), method: :delete, data: { confirm: 'Are you sure?' }
+  \|
+= link_to 'Back', company_path(@company)
