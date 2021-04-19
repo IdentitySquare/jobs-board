@@ -2,8 +2,7 @@ require 'rails_helper'
 
 describe 'the signin process', type: :feature do
   before :each do
-    @user = build(:user)
-    @user.save!
+    @user = create(:user)
   end
 
   it 'signs @user in' do

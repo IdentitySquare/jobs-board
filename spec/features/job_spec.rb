@@ -1,14 +1,11 @@
 require 'rails_helper'
 
 describe 'does not allows guests', type: :feature do
-  let(:user) { build(:user) }
-  let(:company) { build(:company, user_id: user.id) }
-  let(:job) { build(:job, company_id: company.id) }
+  let(:user) { create(:user) }
+  let(:company) { create(:company, user_id: user.id) }
+  let(:job) { create(:job, company_id: company.id) }
 
   it 'to create a new job' do
-    user.save!
-    company.save!
-    job.save!
     visit "/companies/#{company.id}/jobs/new"
 
     expect(page).to have_text('Action not authorized!')
@@ -16,9 +13,6 @@ describe 'does not allows guests', type: :feature do
   end
 
   it 'to edit companies' do
-    user.save!
-    company.save!
-    job.save!
     visit "/companies/#{company.id}/jobs/#{job.id}/edit"
 
     expect(page).to have_text('Action not authorized!')
@@ -27,16 +21,12 @@ describe 'does not allows guests', type: :feature do
 end
 
 describe 'does not allow a different user', type: :feature do
-  let(:user) { build(:user) }
-  let(:user2) { build(:user, email: 'jake2@gmail.com') }
-  let(:company) { build(:company, user_id: user.id) }
-  let(:job) { build(:job, company_id: company.id) }
+  let(:user) { create(:user) }
+  let(:user2) { create(:user, email: 'jake2@gmail.com') }
+  let(:company) { create(:company, user_id: user.id) }
+  let(:job) { create(:job, company_id: company.id) }
 
   it "edit a company that doesn't belong to " do
-    user.save!
-    company.save!
-    user2.save!
-    job.save!
     visit new_user_session_path
     fill_in 'Email', with: 'jake2@gmail.com'
     fill_in 'Password', with: 'password'
@@ -51,12 +41,9 @@ end
 describe 'allows users', type: :feature do
   before :each do
     Capybara.current_driver = :selenium
-    @user = build(:user)
-    @user.save!
-    @company = build(:company, user_id: @user.id)
-    @company.save!
-    @job = build(:job, company_id: @company.id)
-    @job.save!
+    @user = create(:user)
+    @company = create(:company, user_id: @user.id)
+    @job = create(:job, company_id: @company.id)
     visit new_user_session_path
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password

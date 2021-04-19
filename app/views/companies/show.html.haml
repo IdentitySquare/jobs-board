@@ -4,6 +4,7 @@
   = @company.name
 %p
   = @company.description
+
 -if policy(@company).update?
   = link_to 'Edit', edit_company_path(@company)
   \|
@@ -36,6 +37,7 @@
           -if policy(@company).update?
             %td= link_to 'Edit', edit_company_job_path(@company, job)
             %td= link_to 'Delete', company_job_path(@company, job), method: :delete, data: { confirm: 'Are you sure?' }
+            
 %br
 - if @company.user == current_user
   = link_to 'Add a new job listing', new_company_job_path(@company, @job), class: 'btn btn-success'

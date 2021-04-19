@@ -9,13 +9,3 @@ FactoryBot.define do
     confirmed_at { DateTime.now }
   end
 end
-# FactoryBot.define do
-#   factory :user do
-#     first_name { 'John' }
-#     last_name  { 'Doe' }
-#     email { 'jake@gmail.com' }
-#     password { 'password' }
-#     password_confirmation { 'password' }
-#     confirmed_at { DateTime.now }
-#   end
-# end

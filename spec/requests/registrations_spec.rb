@@ -7,5 +7,11 @@ describe 'registrations', type: :request do
 
       expect(response).to have_http_status(:success)
     end
+
+    it 'edit path returns a 302 response' do
+      get edit_user_registration_path
+
+      expect(response).to have_http_status(302)
+    end
   end
 end

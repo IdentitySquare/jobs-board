@@ -7,8 +7,7 @@ end
 
 describe 'company creation specs' do
   it 'should be able to save company only with a user present' do
-    user = build(:user)
-    user.save!
+    user = create(:user)
     company = build(:company, user_id: user.id)
 
     expect(company.save).to eq(true)

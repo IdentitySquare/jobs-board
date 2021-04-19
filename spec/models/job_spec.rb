@@ -7,17 +7,23 @@ RSpec.describe Job, type: :model do
 
   describe 'company creation specs' do
     it 'should be able to save job only with a user who the ocmpany belongs to' do
-      user = build(:user)
-      user.save!
-      company = build(:company, user_id: user.id)
-      company.save!
+      user = create(:user)
+      company = create(:company, user_id: user.id)
       job = build(:job, company_id: company.id)
 
       expect(job.save).to eq(true)
     end
 
-    it 'should not be able to save company without a user' do
-      job = build(:job, company_id: 1)
+    it 'should not be able to create a job as a guest' do
+      job = build(:job)
+
+      expect(job.save).to eq(false)
+    end
+
+    it "should not be able to create a job under a company owned by another user" do
+      user = create(:user, id: 1)
+      company = create(:company, user_id: 1)
+      job = build(:job, company_id: 2)
 
       expect(job.save).to eq(false)
     end

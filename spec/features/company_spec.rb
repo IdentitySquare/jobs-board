@@ -9,10 +9,8 @@ describe 'does not allows guests', type: :feature do
   end
 
   it 'to edit companies' do
-    user = build(:user)
-    user.save!
-    company = build(:company, user_id: user.id)
-    company.save!
+    user = create(:user)
+    company = create(:company, user_id: user.id)
     visit "/companies/#{company.id}/edit"
 
     expect(page).to have_text('You need to sign in or sign up before continuing.')
@@ -22,12 +20,9 @@ end
 
 describe 'does not allow a different user', type: :feature do
   it "edit a company that doesn't belong to " do
-    user = build(:user)
-    user.save!
-    company = build(:company, user_id: user.id)
-    company.save!
-    user2 = build(:user)
-    user2.save!
+    user = create(:user)
+    company = create(:company, user_id: user.id)
+    user2 = create(:user)
     visit new_user_session_path
     fill_in 'Email', with: user2.email
     fill_in 'Password', with: user2.password
@@ -42,8 +37,7 @@ end
 describe 'allows users', type: :feature do
   before :each do
     Capybara.current_driver = :selenium
-    user = build(:user)
-    user.save!
+    user = create(:user)
     visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password

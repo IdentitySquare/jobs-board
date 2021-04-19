@@ -1,10 +1,12 @@
 class JobsController < ApplicationController
-  before_action :get_company
+  before_action :set_company
   before_action :set_job, only: %i[show edit update destroy]
 
   after_action :verify_authorized, except: %i[index show]
 
-  def index; end
+  def index
+    redirect_to controller: :companies, action: :show, id: @company.id, company_id: nil
+  end
 
   def show; end
 
@@ -38,8 +40,11 @@ class JobsController < ApplicationController
 
   def destroy
     authorize @job
-    @job.destroy
-    redirect_to companies_path(@company), notice: 'Job was successfully destroyed.'
+    if @job.destroy
+      redirect_to companies_path(@company), notice: 'Job was successfully destroyed.'
+    else
+      redirect_to companies_path(@company), notice: 'Job could not be destroyed. Try again!'
+    end
   end
 
   private
@@ -52,7 +57,7 @@ class JobsController < ApplicationController
     params.require(:job).permit(:title, :description, :company_id, :job_type)
   end
 
-  def get_company
+  def set_company
     @company = Company.find(params[:company_id])
   end
 end

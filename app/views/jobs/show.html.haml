@@ -6,6 +6,7 @@
 %br
 %br
 %br
+
 %h3
   %b
     = @job.title
@@ -16,6 +17,7 @@
 %p
   %b Job Type:
   = @job.job_type
+
 -if current_user == @company.user
   = link_to 'Edit', edit_company_job_path(@company, @job)
   \|

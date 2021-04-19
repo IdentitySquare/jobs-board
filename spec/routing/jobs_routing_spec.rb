@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe JobsController, type: :routing do
   describe 'routing' do
     it 'routes to #index' do
-      expect(get: 'companies/1/companies/1').to route_to('jobs#index', company_id: '1', id: '1')
+      expect(get: 'companies/1/jobs').to route_to('jobs#index', company_id: '1')
     end
 
     it 'routes to #new' do

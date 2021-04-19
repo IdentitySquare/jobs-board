@@ -3,8 +3,7 @@ require 'rails_helper'
 describe 'the edit user details process', type: :feature do
   before :each do
     Capybara.current_driver = :selenium
-    @user = build(:user)
-    @user.save!
+    @user = create(:user)
     visit new_user_session_path
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
