@@ -13,4 +13,5 @@ RSpec.describe '/users/password', type: :request do
 
       expect(response).to have_http_status(:success)
     end
+  end
 end
