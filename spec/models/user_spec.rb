@@ -9,7 +9,7 @@ end
 
 context 'extra tests' do
   it 'ensures user is valid only if both passwords match' do
-    user = build(:user, password_confirmation: 'password1')
+    user = build(:user, password: 'password', password_confirmation: 'password1')
 
     expect(user.valid?).to eq(false)
   end

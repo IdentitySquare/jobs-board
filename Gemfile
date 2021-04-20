@@ -25,7 +25,7 @@ gem 'devise'
 gem 'haml-rails'
 gem 'pundit'
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -54,6 +54,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'webdrivers'
 end

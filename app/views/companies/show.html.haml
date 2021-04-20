@@ -1,14 +1,45 @@
 %p#notice= notice
 
-%p
-  %b Name:
+%h2
   = @company.name
 %p
-  %b Description:
   = @company.description
+
 -if policy(@company).update?
   = link_to 'Edit', edit_company_path(@company)
   \|
   = link_to 'Delete', @company, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+%br
+
+-if @company.jobs.count.zero?
+  %h3 No jobs available at this time
+-else
+  %h2 All job listings
+
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Title
+        %th Job type
+        %th
+        -if policy(@company).update?
+          %th
+          %th
+
+    %tbody
+      - @company.jobs.each do |job|
+        %tr
+          %td= job.title
+          %td= job.job_type == 'full_time' ? 'Full-time' : 'Part-time'
+          %td= link_to 'View Job', company_job_path(@company, job)
+          -if policy(@company).update?
+            %td= link_to 'Edit', edit_company_job_path(@company, job)
+            %td= link_to 'Delete', company_job_path(@company, job), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+- if @company.user == current_user
+  = link_to 'Add a new job listing', new_company_job_path(@company, @job), class: 'btn btn-success'
   \|
 = link_to 'Back', companies_path

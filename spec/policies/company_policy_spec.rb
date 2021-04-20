@@ -11,25 +11,19 @@ RSpec.describe CompanyPolicy, type: :policy do
   end
 
   permissions :edit?, :create?, :update?, :destroy? do
-    let(:user) { build(:user) }
-    let(:user2) { build(:user) }
-    let(:company) { build(:company, user_id: user.id) }
+    let(:user) { create(:user) }
+    let(:company) { create(:company, user_id: user.id) }
+    let(:user2) { create(:user) }
 
     it 'grants edit, create or delete access only to owner of company' do
-      user.save!
-
       expect(subject).to permit(user, company)
     end
 
     it 'does not grant edit, create or delete access to other users' do
-      user2.save!
-
       expect(subject).to_not permit(user2, company)
     end
 
     it 'does not grant edit, create or delete access to guest' do
-      user.save!
-
       expect(subject).to_not permit(nil, company)
     end
   end

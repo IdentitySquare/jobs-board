@@ -3,10 +3,9 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: %i[show edit update destroy]
 
   after_action :verify_authorized, except: %i[index show]
-  after_action :verify_policy_scoped, only: %i[index]
 
   def index
-    @companies = policy_scope(Company)
+    @companies = Company.all
   end
 
   def show; end
@@ -41,8 +40,11 @@ class CompaniesController < ApplicationController
 
   def destroy
     authorize @company
-    @company.destroy
-    redirect_to companies_url, notice: 'Company was successfully destroyed.'
+    if @company.destroy
+      redirect_to companies_url, notice: 'Company was successfully destroyed.'
+    else
+      redirect_to companies_url, notice: 'Company could not be destroyed. Try again!'
+    end
   end
 
   private
