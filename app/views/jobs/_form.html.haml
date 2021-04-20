@@ -14,7 +14,7 @@
     = f.rich_text_area :description, class: "form-control"
   .field
     = f.label :job_type
-    = f.select :job_type, Job.job_types.keys, class: "form-control"
+    = f.select :job_type, [['Full-Time', 'full_time'], ['Part-Time', 'part_time']], class: "form-control"
   %br
   .actions
     = f.submit 'Save'

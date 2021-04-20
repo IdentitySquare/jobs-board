@@ -32,12 +32,12 @@
       - @company.jobs.each do |job|
         %tr
           %td= job.title
-          %td= job.job_type
+          %td= job.job_type == 'full_time' ? 'Full-time' : 'Part-time'
           %td= link_to 'View Job', company_job_path(@company, job)
           -if policy(@company).update?
             %td= link_to 'Edit', edit_company_job_path(@company, job)
             %td= link_to 'Delete', company_job_path(@company, job), method: :delete, data: { confirm: 'Are you sure?' }
-            
+
 %br
 - if @company.user == current_user
   = link_to 'Add a new job listing', new_company_job_path(@company, @job), class: 'btn btn-success'

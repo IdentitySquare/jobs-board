@@ -3,7 +3,7 @@ class Job < ApplicationRecord
 
   has_rich_text :description
 
-  enum job_type: { 'Full-time': 0, 'Part-time': 1 }
+  enum job_type: { full_time: 0, part_time: 1 }
 
   validates :title, :description, :job_type, presence: true
 end
