@@ -1,23 +1,41 @@
-%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-  .container-fluid
-    %a.navbar-brand{:href => "/"} Jake's Jobs Board™
-    %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarNav", "data-bs-toggle" => "collapse", :type => "button"}
-      %span.navbar-toggler-icon
-    #navbarNav.collapse.navbar-collapse
-      %ul.navbar-nav
+%nav.navbar{"aria-label" => "main navigation", role: "navigation"}
+  .navbar-brand
+    %a.navbar-item{href: "/"}
+      %img{height: "56", src: asset_path('logo.png'), width: "56"}/
+    %a.navbar-burger{"aria-expanded" => "false", "aria-label" => "menu", "data-target" => "navbarBasicExample", role: "button"}
+      %span{"aria-hidden" => "true"}
+      %span{"aria-hidden" => "true"}
+      %span{"aria-hidden" => "true"}
+  #navbarBasicExample.navbar-menu
+    .navbar-start
+      %a.navbar-item{href: companies_path}
+        View All Companies
+      - if user_signed_in?
+        %a.navbar-item{href: new_company_path}
+          Add New Company
+      -# .navbar-item.has-dropdown.is-hoverable
+      -#   %a.navbar-link
+      -#     More
+      -#   .navbar-dropdown
+      -#     %a.navbar-item
+      -#       About
+      -#     %a.navbar-item
+      -#       Jobs
+      -#     %a.navbar-item
+      -#       Contact
+      -#     %hr.navbar-divider/
+      -#     %a.navbar-item
+      -#       Report an issue
+    .navbar-end
+      .navbar-item
+        .buttons
         - if user_signed_in?
-          %li.nav-item
-            = link_to 'Add Company', new_company_path, class: 'nav-link'
-        %li.nav-item
-          = link_to 'View Companies', companies_path, class: 'nav-link'
-      %ul.navbar-nav.ml-auto
-        - if user_signed_in?
-          %li.nav-item
-            = link_to current_user.email, edit_user_registration_path, class: "nav-link"
-          %li.nav-item
-            = link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary"
+          %a.navbar-item{href: edit_user_registration_path}
+            #{current_user.email}
+          %a.button.is-link{'data-method': :delete, href: destroy_user_session_path}
+            %strong Sign out
         - else
-          %li.nav-item
-            = link_to 'Register', new_user_registration_path, class: 'nav-link'
-          %li.nav-item
-            = link_to 'Sign in', new_user_session_path, class: 'nav-link'
+          %a.button.is-link{href: new_user_registration_path}
+            %strong Sign up
+          %a.button.is-light{href: new_user_session_path}
+            Sign in
