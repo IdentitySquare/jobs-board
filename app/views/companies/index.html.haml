@@ -1,16 +1,11 @@
-%h1 All Companies
-
-%table.table.table-striped
-  %thead
-    %tr
-      %th Name
-      %th Description
-
-  %tbody
-    - @companies.each do |company|
-      %tr
-        %td= link_to company.name, company
-        %td= company.description
-
 %br
-= link_to 'Add a new company', new_company_path, class: 'btn btn-success' if user_signed_in?
+%h3.title.is-3 All Companies
+
+- @companies.each do |company|
+  %br
+  .card
+    .card-content
+      .content
+        %h5.title.is-5
+          = link_to company.name, company
+        = company.description

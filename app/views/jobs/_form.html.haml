@@ -8,13 +8,14 @@
 
   .field
     = f.label :title
-    = f.text_field :title, class: "form-control"
+    = f.text_field :title, class: "input is-primary"
   .field
     = f.label :description
-    = f.rich_text_area :description, class: "form-control"
+    = f.rich_text_area :description, class: "textarea is-primary"
   .field
     = f.label :job_type
     = f.select :job_type, [['Full-Time', 'full_time'], ['Part-Time', 'part_time']], class: "form-control"
   %br
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: 'button is-success'
+    = link_to 'Back', company_path(@company), class: 'button is-warning'

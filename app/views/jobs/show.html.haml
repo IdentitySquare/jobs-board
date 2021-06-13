@@ -1,26 +1,24 @@
-%p#notice= notice
-
-%h2
+%br
+%h3.title.is-3 Company Description
+%b
+%p.subtitle.is-4
   = @company.description
-= link_to "View all jobs from #{@company.name}", company_path(@company)
+= link_to "View all jobs from #{@company.name}", company_path(@company), class: 'button is-info'
 %br
 %br
 %br
 
-%h3
+%h5.title.is-5
   %b
     = @job.title
-%br
 %p
   %b Job Description:
   = @job.description
 %p
   %b Job Type:
   = @job.job_type == 'full_time' ? 'Full-time' : 'Part-time'
-
+%br
 -if current_user == @company.user
-  = link_to 'Edit', edit_company_job_path(@company, @job)
-  \|
-  = link_to 'Delete', company_job_path(@company, @job), method: :delete, data: { confirm: 'Are you sure?' }
-  \|
-= link_to 'Back', company_path(@company)
+  = link_to 'Edit', edit_company_job_path(@company, @job), class: 'button is-info'
+  = link_to 'Delete', company_job_path(@company, @job), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger'
+= link_to 'Back', company_path(@company), class: 'button is-warning'

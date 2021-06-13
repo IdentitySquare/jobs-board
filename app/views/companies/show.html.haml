@@ -1,45 +1,36 @@
-%p#notice= notice
-
-%h2
+%br
+%h3.title.is-3
   = @company.name
 %p
   = @company.description
-
+%br
 -if policy(@company).update?
-  = link_to 'Edit', edit_company_path(@company)
-  \|
-  = link_to 'Delete', @company, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-%br
-
+  = link_to 'Add a new job listing', new_company_job_path(@company, @job), class: 'button is-success'
+  = link_to 'Edit company', edit_company_path(@company), class: 'button is-info'
+  = link_to 'Delete company', @company, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger'
+  %br
+  %br
 -if @company.jobs.count.zero?
   %h3 No jobs available at this time
 -else
-  %h2 All job listings
-
-  %table.table.table-striped
-    %thead
-      %tr
-        %th Title
-        %th Job type
-        %th
+  %br
+  %br
+  %h4.title.is-4 All job listings
+- @company.jobs.each do |job|
+  %br
+  .card
+    .card-content
+      .content
+        %h5.title.is-5
+          = job.title
+        = job.job_type == 'full_time' ? 'Full-time' : 'Part-time'
+        %br
+        %br
+        = link_to 'More details', company_job_path(@company, job), class: 'button is-success'
         -if policy(@company).update?
-          %th
-          %th
-
-    %tbody
-      - @company.jobs.each do |job|
-        %tr
-          %td= job.title
-          %td= job.job_type == 'full_time' ? 'Full-time' : 'Part-time'
-          %td= link_to 'View Job', company_job_path(@company, job)
-          -if policy(@company).update?
-            %td= link_to 'Edit', edit_company_job_path(@company, job)
-            %td= link_to 'Delete', company_job_path(@company, job), method: :delete, data: { confirm: 'Are you sure?' }
-
+          = link_to 'Edit', edit_company_job_path(@company, job), class: 'button is-info'
+          = link_to 'Delete', company_job_path(@company, job), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger'
 %br
-- if @company.user == current_user
-  = link_to 'Add a new job listing', new_company_job_path(@company, @job), class: 'btn btn-success'
-  \|
-= link_to 'Back', companies_path
+= link_to 'Back', companies_path, class: 'button is-warning'
+%br
+%br

@@ -1,20 +1,21 @@
-%h2
+%br
+%h3.title.is-3
   Edit #{resource_name.to_s.humanize}
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = render "devise/shared/error_messages", resource: resource
   .field
     = f.label :first_name
     %br/
-    = f.text_field :first_name, autofocus: true, autocomplete: "given-name"
+    = f.text_field :first_name, autofocus: true, autocomplete: "given-name", class: "input is-rounded"
     %br/
   .field
     = f.label :last_name
     %br/
-    = f.text_field :last_name, autocomplete: "family-name"
+    = f.text_field :last_name, autocomplete: "family-name", class: "input is-rounded"
   .field
     = f.label :email
     %br/
-    = f.email_field :email, autocomplete: "email"
+    = f.email_field :email, autocomplete: "email", class: "input is-rounded"
   - if devise_mapping.confirmable? && resource.pending_reconfirmation?
     %div
       Currently waiting confirmation for: #{resource.unconfirmed_email}
@@ -22,22 +23,25 @@
     = f.label :password
     %i (min: 6 chars, leave blank if unchanged)
     %br/
-    = f.password_field :password, autocomplete: "new-password"
+    = f.password_field :password, autocomplete: "new-password", class: "input is-rounded"
     - if @minimum_password_length
       %br/
   .field
     = f.label :password_confirmation
     %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
+    = f.password_field :password_confirmation, autocomplete: "new-password", class: "input is-rounded"
   .field
     = f.label :current_password
     %i (required to change email and/or password)
     %br/
-    = f.password_field :current_password, autocomplete: "current-password"
+    = f.password_field :current_password, autocomplete: "current-password", class: "input is-rounded"
   .actions
-    = f.submit "Update"
-%br/
-%h3 Delete my account
+    = f.submit "Update", class: 'button is-success'
+%br
+%br
+%h6.title.is-6 Delete my account
 %p
-  This will also delete all job postings from the website! #{button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger'}
-= link_to "Back", :back
+  This will also delete all your job postings from the website!
+  %br
+  = link_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'button is-danger'
+  = link_to "Back", :back, class: 'button is-warning'

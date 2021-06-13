@@ -6,7 +6,7 @@ RSpec.describe Job, type: :model do
   it { should validate_presence_of(:job_type) }
 
   describe 'company creation specs' do
-    it 'should be able to save job only with a user who the ocmpany belongs to' do
+    it 'should be able to save job only with a user who the company belongs to' do
       user = create(:user)
       company = create(:company, user_id: user.id)
       job = build(:job, company_id: company.id)
